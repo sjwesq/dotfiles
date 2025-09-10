@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<labwc_config>
+  <desktops number="4">
+  </desktops>
+  <theme>
+    <name>everforest</name>
+    <dropShadows>yes</dropShadows>
+    <cornerRadius>0</cornerRadius>
+    <font name="Roboto Condensed" size="12"/>
+    <font place="ActiveWindow" name="Roboto Condensed" size="12" weight="bold" />
+  </theme>
+
+  <keyboard>
+    <layoutScope>global</layoutScope>
+    <keybind key="A-F4">
+      <action name="Close" />
+    </keybind>
+    <keybind key="A-Tab">
+      <action name="NextWindow" />
+    </keybind>
+    <keybind key="A-`">
+      <action name="PreviousWindow" />
+    </keybind>
+    <keybind key="W-Space">
+      <action name="Execute" command="xfce4-appfinder"/>
+    </keybind>
+    <keybind key="W-1">
+      <action name="GoToDesktop" to="1" />
+    </keybind>
+    <keybind key="W-2">
+      <action name="GoToDesktop" to="2" />
+    </keybind>
+    <keybind key="W-3">
+      <action name="GoToDesktop" to="3" />
+    </keybind>
+    <keybind key="W-4">
+      <action name="GoToDesktop" to="4" />
+    </keybind>
+    <keybind key="W-f">
+      <action name="ToggleMaximize" />
+    </keybind>
+    <keybind key="W-S-f">
+      <action name="ToggleFullscreen" />
+    </keybind>
+    <keybind key="W-Return">
+      <action name="Execute" command="lab-sensible-terminal" />
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute" command="waylock" />
+    </keybind>
+    <keybind key="W-s">
+      <action name="Execute" command="grimshot copy output" />
+    </keybind>
+    <keybind key="W-S-s">
+      <action name="Execute" command="grimshot copy area" />
+    </keybind>
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute" command="pamixer -i 5" />
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute" command="pamixer -d 5" />
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute" command="pactl set-sink-mute @DEFAULT_SINK@ toggle" />
+    </keybind>
+    <keybind key="A-Space">
+      <action name="ShowMenu" menu="client-menu" atCursor="no" />
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <default />
+  </mouse>
+
+  <libinput>
+    <device category="default">
+      <pointerSpeed>-0.6</pointerSpeed>
+    </device>
+  </libinput>
+
+  <windowRules>
+    <windowRule title="Volume Control">
+      <action name="SetDecorations" decorations="border" />
+      <action name="MoveToEdge" direction="up" snapWindows="false" />
+      <action name="MoveToEdge" direction="right" snapWindows="false" />
+    </windowRule>
+    <windowRule title="Mullvad VPN">
+      <action name="MoveToEdge" direction="up" snapWindows="false" />
+      <action name="MoveToEdge" direction="right" snapWindows="false" />
+    </windowRule>
+    <windowRule title="Application Finder">
+      <action name="SetDecorations" decorations="border" />
+      <action name="MoveToEdge" direction="up" snapWindows="false" />
+      <action name="MoveToEdge" direction="left" snapWindows="false" />
+    </windowRule>
+    <windowRule title="Pomodoro Timer">
+      <action name="SetDecorations" decorations="border" />
+      <action name="ToggleAlwaysOnTop" />
+      <action name="MoveToEdge" direction="down" snapWindows="false" />
+      <action name="MoveToEdge" direction="center" snapWindows="false" />
+    </windowRule>
+  </windowRules>
+
+</labwc_config>

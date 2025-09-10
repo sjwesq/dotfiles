@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+read -p "Enter name: " name
+read -p "Enter e-mail: " email
+
+[[ -n $name ]] && git config --global user.name "$name"
+[[ -n $email ]] && git config --global user.email "$email"
+
+git config --global init.defaultBranch main
+git config --global core.pager "less --mouse -F"
+git config --global core.editor nvim
+git config --global merge.tool "nvimdiff"
+git config --global mergetool.keepBackup false
+
+echo "/.sjwesq" >~/.config/gitignore
+git config --global core.excludesfile ~/.config/gitignore
+
+read -p "Enable SSH signing? (y/N) " signing
+if [[ $signing == "y" ]]; then
+  git config --global gpg.format ssh
+  git config --global commit.gpgsign true
+  printf "Remember to configure 'git config --global user.signingkey'.\n"
+fi
+
+# Aliases
+git config --global alias.ll \
+  'log --graph --pretty=format:%C\(auto\)%h%\(decorate:pointer="->"\)\ %Cblue%an%C\(auto\):%s\ %C\(7\)%cr'
+git config --global alias.spush !~/scripts/securepush

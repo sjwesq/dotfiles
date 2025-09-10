@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+dap_name="$1"
+dap_default="SOPHIE"
+username="$(whoami)"
+
+[[ -z $dap_name ]] && dap_name="$dap_default"
+dap_directory="/run/media/$username/$dap_name/"
+
+if [[ -d $dap_directory ]]; then
+  rsync -rvu --delete --exclude ".*" --exclude "MIDI" --exclude "Playlists" \
+    ~/Music/ "$dap_directory"
+else
+  printf "ERROR: $dap_directory not found.\n"
+fi

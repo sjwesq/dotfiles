@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+source_branch="$1"
+branch_current=$(git branch --show-current)
+
+[[ -z $source_branch ]] && source_branch="main"
+
+git checkout $source_branch
+git pull
+git checkout "$branch_current"
+git rebase main "$branch_current"

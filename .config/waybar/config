@@ -1,0 +1,168 @@
+{
+    "layer": "bottom",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "gtk-layer-shell": true,
+    "margin-bottom": -1,
+    "passthrough": false,
+    "height": 32,
+    "modules-left": [
+        "custom/os_button",
+        "custom/file_launcher",
+        "custom/firefox_launcher",
+        "custom/terminal_launcher",
+        "workspaces",
+        "wlr/taskbar"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "disk",
+        "tray",
+        "pulseaudio",
+        "network",
+        "battery",
+        "clock",
+        "custom/power_button"
+    ],
+    "custom/firefox_launcher": {
+        "format": "󰈹",
+        "on-click": "firefox",
+        "tooltip": true,
+        "tooltip-format": "Firefox"
+    },
+    "custom/terminal_launcher": {
+        "format": "",
+        "on-click": "$TERMINAL",
+        "tooltip": true,
+        "tooltip-format": "Terminal"
+    },
+    "custom/os_button": {
+        "format": "",
+        "on-click": "xfce4-appfinder",
+        "tooltip": false
+    },
+    "custom/file_launcher": {
+        "format": "",
+        "on-click": "thunar",
+        "tooltip": true,
+        "tooltip-format": "Browse files"
+    },
+    "custom/power_button": {
+        "format": "󰐥",
+        "on-click": "zenity --warning --title=\"poweroff\" --text=\"Shutting down...\" & loginctl poweroff",
+        "tooltip": true,
+        "tooltip-format" : "Shut down"
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "   {usage}%",
+        "max-length": 10
+    },
+    "disk": {
+        "interval": 30,
+        "format": "󰋊  {percentage_used}%",
+        "path": "/home",
+        "tooltip": true,
+        "unit": "GB",
+        "tooltip-format":  "Available {free} of {total}"
+    },
+    "memory": {
+        "interval": 10,
+        "format": "   {percentage}%",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "RAM - {used:0.1f}GiB used"
+    },
+    "wlr/taskbar": {
+        "format": "{icon} {title:.17}",
+        "icon-size": 24,
+        "spacing": 3,
+        "on-click-middle": "close",
+        "tooltip-format": "{title}",
+        "ignore-list": [],
+        "on-click": "activate"
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 6
+    },
+    "clock": {
+        "format": "      {:%R\n %a %b %d}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "network": {
+        "format-wifi": " {icon}",
+        "format-ethernet": " ",
+        "format-disconnected": "󰌙",
+        "format-icons": [
+            "󰤯 ",
+            "󰤟 ",
+            "󰤢 ",
+            "󰤢 ",
+            "󰤨 "
+        ]
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "󰂎",
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ]
+    },
+    "pulseaudio": {
+        "max-volume": 100,
+        "scroll-step": 5,
+        "format": "{icon}",
+        "tooltip-format": "{volume}%",
+        "format-muted": " ",
+        "format-icons": {
+            "default": [
+                " ",
+                " ",
+                " "
+            ]
+        },
+        "on-click": "bash -c 'pgrep -x pavucontrol > /dev/null && pkill -x pavucontrol || pavucontrol &'"
+    }
+}

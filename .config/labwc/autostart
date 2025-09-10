@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+pipewire &
+/usr/libexec/xfce-polkit &
+(
+  wlr-randr --output DP-1 --mode 2560x1440@119.998001 --pos 0,196
+  wlr-randr --output HDMI-A-1 --off
+  sleep 1
+  wlr-randr --output HDMI-A-1 --on --transform 90 --pos 2560,0
+  xrandr --output DP-1 --primary
+) &
+swaybg -i ~/Pictures/Wallpapers/March7th_Horizon.png -m fill >/dev/null 2>&1 &
+waybar &
+gammastep &
+udiskie &
+fcitx5 &
+xfce4-appfinder --daemon &
+syncthing serve --no-browser --logflags=0 >/dev/null 2>&1 &
+
+swayidle -w \
+  timeout 300 'dim -a 0.75&' \
+  timeout 600 'waylock &' \
+  timeout 660 '\
+    wlr-randr --output HDMI-A-1 --off
+    wlr-randr --output DP-1 --off
+    pkill waybar
+  ' \
+  resume '
+    /home/snesjw/scripts/screenres&
+    waybar&
+  ' \
+  before-sleep 'waylock &' &
+
+sleep 30 && sway-audio-idle-inhibit & # Doesn't seem to work otherwise

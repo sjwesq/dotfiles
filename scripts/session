@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+autocmd_inject() { echo "autocmd ExitPre * :mksession! $@" >>"$@"; }
+
+session_name=$1
+dir_storage=".sjwesq/"
+
+if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) ]]; then
+  dir_storage="$(git rev-parse --show-toplevel)/$dir_storage"
+fi
+
+[[ -z $session_name ]] && session_name="main"
+
+file_session="$dir_storage$session_name.vim"
+file_shada="$dir_storage$session_name.shada"
+
+mkdir "$dir_storage" 2>/dev/null
+if [[ ! -f $file_session ]]; then
+  nvim -c "mksession! $file_session|q"
+fi
+
+autocmd_inject $file_session
+nvim -i "$file_shada" -S "$file_session"

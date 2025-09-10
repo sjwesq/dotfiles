@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script is kind of janky. It's the only way I could get everything working
+# properly...
+monitor_wait=3
+
+wlr-randr --output DP-1 --on
+sleep "$monitor_wait"
+wlr-randr --output DP-1 --mode 2560x1440@119.998001 --pos 0,196
+xrandr --output DP-1 --primary
+
+wlr-randr --output HDMI-A-1 --on
+sleep "$monitor_wait"
+wlr-randr --output HDMI-A-1 --mode 1920x1080 --preferred --transform 90 --pos 2560,0
+labwc -r

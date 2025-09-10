@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+sync_folder() {
+  rsync -rvu --delete --exclude ".*" "$1" "$2"
+}
+
+device_name="$1"
+device_default="Sophie♥"
+
+[[ -z $device_name ]] && device_name="$device_default"
+device_dir="/run/media/snesjw/$device_name"
+
+if [[ -d $device_dir ]]; then
+  sync_folder ~/Sync/backup/ "$device_dir/Backup/"
+  sync_folder ~/Projects/ "$device_dir/Projects/"
+  sync_folder ~/Music/ "$device_dir/Music"
+else
+  printf "ERROR: $device_dir not found.\n"
+fi

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+kitty -o initial_window_width=162 -o initial_window_height=30 -o tab_bar_style=hidden -o background_opacity=0.5 -T "Pomodoro Timer" bash -c '~/Projects/pomodoro.sh/pomodoro.sh -m'

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+projectname=""
+username="sjwesq"
+create_repo=true
+
+while getopts 'dhp:u:' OPTION; do
+  case "$OPTION" in
+    d)
+      create_repo=false
+      ;;
+    p)
+      projectname="$OPTARG"
+      ;;
+    u)
+      username="$OPTARG"
+      ;;
+  esac
+done
+
+if [[ "$projectname" = "" ]]; then
+  printf "ERROR: Use '-p' flag to choose project name\n"
+  exit 1
+fi
+
+mkdir "$projectname"
+cd "$projectname"
+
+git init
+if $create_repo; then
+  gh repo create "$projectname" --private
+fi
+git remote add origin git@github.com:"$username"/"$projectname"
+git remote set-url --push --add origin git@github.com:"$username"/"$projectname"
+git remote set-url --push --add origin git@gitlab.com:"$username"/"$projectname"
