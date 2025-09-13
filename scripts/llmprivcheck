@@ -2,17 +2,12 @@
 # Don't trust this for actual security, this was just an experiment! It works
 # better than I thought, though, so it might be fine as a second pass after
 # you've already investigated the files you're checking.
-echo_red() {
-  printf "\e[31m$1\e[0m\n"
-}
-
-for f in $(find -type f); do
-  echo_red "$(readlink -f $f)"
-  printf "\`\`\`\n%s\n\`\`\`\n \
-    Identify if the above code has any potentially compromising data. Look for \
-    passwords and other compromising values. Also search for values that might \
-    contain private, personal information. Don't describe the script. Keep \
-    answers short.\n" \
-    "$(cat $f)" |
-    ollama run qwen2.5-coder:7b
-done
+find -type f -exec bash -c '
+prompt="Identify if the above code has any potentially compromising data. Look \
+for passwords and other compromising values. Also search for values that might \
+contain private, personal information. Do not describe the script. Keep \
+answers short."
+printf "\e[31m%s\e[0m\n" "{}"
+printf "\`\`\`\n%s\n\`\`\`\n%s\n" "$(cat "{}")" "$prompt" |
+  ollama run qwen2.5-coder:7b
+' \;
