@@ -66,6 +66,9 @@
     <keybind key="A-Space">
       <action name="ShowMenu" menu="client-menu" atCursor="no" />
     </keybind>
+    <keybind key="C-S-A-|">
+      <action name="ResizeTo" width="1280" height="960" />
+    </keybind>
   </keyboard>
 
   <mouse>
